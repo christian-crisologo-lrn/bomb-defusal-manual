@@ -1,2 +1,3 @@
-# bomb-defusal-manual
+# BOMB DEFUSAL MANUAL GAME
 Learnosity bootcamp demo project (#bootcamp2020)
+
