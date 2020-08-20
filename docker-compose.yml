@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+    bombdefuse:
+        build: .
+        image: bomb_defuse:1.0
+        restart: always
+        ports:
+            - 80:80
