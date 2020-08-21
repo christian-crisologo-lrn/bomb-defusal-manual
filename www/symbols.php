@@ -74,7 +74,7 @@
               <td><img src="/images/3-hollowstar.png" class="img-rounded" style="width:40px;height:40px;background-color: #ffffff;"></td>
               <td><img src="/images/7-squidknife.png" class="img-rounded" style="width:40px;height:40px;background-color: #ffffff;"></td>
               <td><img src="/images/9-hookn.png" class="img-rounded" style="width:40px;height:40px;background-color: #ffffff;"></td>
-              <td><img src="/images/11-six.png" class="img-rounded" style="width:40px;height:40px;background-color: #ffffff;"></td>
+              <td><img src="/images/18-nwithhat.png" class="img-rounded" style="width:40px;height:40px;background-color: #ffffff;"></td>
             </tr>
             <tr>
               <td><img src="/images/14-ae.png" class="img-rounded" style="width:40px;height:40px;background-color: #ffffff;"></td>
