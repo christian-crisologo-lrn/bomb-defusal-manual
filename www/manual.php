@@ -50,6 +50,9 @@
         <p class="lead">
           <a href="patterns.php" class="btn btn-lg btn-secondary btn-block">Pattern Matching</a>
         </p>
+        <p class="lead">
+          <a href="homonyms.php" class="btn btn-lg btn-secondary btn-block">Homonym Sets</a>
+        </p>
       </main>
 
     </div>
