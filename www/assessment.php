@@ -23,7 +23,7 @@
 
         // Reference of the Activity to retrieve from the Item bank.
         // The Activity defines which Items will be served in this assessment.
-        'activity_template_id' => 'quickstart_examples_activity_template_001',
+        'activity_template_id' => 'LRN_DEFUSE_ACTIVITY_1',
 
         // Uniquely identifies this specific assessment attempt for save/resume,
         // data retrieval and reporting purposes.
@@ -31,14 +31,14 @@
 
         // Used in data retrieval and reporting to compare results
         // with other users submitting the same assessment.
-        'activity_id'    => 'quickstart_examples_activity_001'
+        'activity_id'    => 'LRN_DEFUSE_ACTIVITY_1'
     ];
 
     // Public & private security keys required to access Learnosity APIs and
     // data. These keys grant access to Learnosity's public demos account.
     // Learnosity will provide keys for your own private account.
-    $consumerKey = 'yis0TYCu7U9V4o7M';
-    $consumerSecret = '74c5fd430cf1242a527f6223aebd42d30464be22';
+    $consumerKey = 'ARV3wIzUPWnC5l18';
+    $consumerSecret = 'oCsuobS0ZBSEw6zG8yepifKSQ3tqgmaBzbPYp1zl';
 
     // Parameters used to create security authorization.
     $security = [
