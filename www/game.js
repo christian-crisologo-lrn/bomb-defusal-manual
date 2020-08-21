@@ -1,6 +1,7 @@
  
 const MAX_TIME = 240;
 let currentQuestionIndex = -1; 
+let isGameOver = false;
 
 const newGame = () => {
     $('.question-container').hide(); 
@@ -15,6 +16,8 @@ function secondsToMinute(d) {
 }
 
 const  timer = (seconds, cb) => {
+    if(isGameOver) return false;
+    //
     let _timeRemaining = seconds;
     cb(seconds);
     setTimeout(function() {
@@ -42,7 +45,7 @@ const nextQuestion = () => {
 }
 
 const gameOver = (status = 'lose')=> {
-    $('.question-container').hide();
+    isGameOver = true;
     $('.learnosity-item').hide();
     $('.btn-answer').hide();
     const response = status === 'lose' ? "BOMB EXPLODED!!!!" : "GOOD JOB! BOMB DEFUSED";
@@ -64,7 +67,7 @@ const gameStart = ()=>{
         if( isCorrect){
             updateScores();
             $('.btn-answer').hide();
-            if(currentQuestionIndex>=totalQuestions-2){
+            if(currentQuestionIndex>=totalQuestions-1){
                 gameOver('win');
             }else{
                setTimeout(nextQuestion,2000); 
