@@ -15,7 +15,8 @@
 
     // Items API configuration parameters.
     $request = [
-        'rendering_type' => 'assess',
+         // "rendering_type":"inline",
+        'rendering_type' => 'inline',
         'type'           => 'submit_practice',
         'name'           => 'Items API Quickstart',
         'state'          => 'initial',
@@ -31,8 +32,12 @@
 
         // Used in data retrieval and reporting to compare results
         // with other users submitting the same assessment.
-        'activity_id'    => 'LRN_DEFUSE_ACTIVITY_1'
-    ];
+        'activity_id'    => 'LRN_DEFUSE_ACTIVITY_1',
+        'assess_inline'  => true, 
+        'config' => [
+            'navigation' =>['show_next' => false,'show_submit'=>false],
+        ]
+    ]; 
 
     // Public & private security keys required to access Learnosity APIs and
     // data. These keys grant access to Learnosity's public demos account.
@@ -59,21 +64,58 @@
 <!-- Section 2: Web page content. -->
 <!DOCTYPE html>
 <html>
-    <head><link rel="stylesheet" type="text/css" href="../css/style.css"></head>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+    </head>
     <body>
-        <h1>Standalone Assessment Example</h1>
+        
 
         <!-- Items API will render the assessment app into this div. -->
         <div id="learnosity_assess"></div>
 
         <!-- Load the Items API library. -->
         <script src="https://items.learnosity.com/"></script>
+        <script src="game.js"></script>
+        <div class="cover-container  w-100 h-100 p-3 mx-auto flex-column">
+            <h1 class="center">Bomb defusal</h1>
+            <div class="question-container inner cover">
+                <span class="learnosity-item" data-reference="LRN_DEFUSE_HASH_1"></span>
+                <span class="learnosity-item" data-reference="LRN_DEFUSE_PATTERN_1"></span>
+                <span class="learnosity-item" data-reference="LRN_DEFUSE_SYMBOLS_1"></span>
+                <span class="learnosity-item" data-reference="LRN_DEFUSE_WIRE_1"></span>
+                <span class="learnosity-item" data-reference="LRN_DEFUSE_WORD_1"></span> 
+                <span class="learnosity-item" data-reference="LRN_DEFUSE_HOMONYM_1"></span> 
 
-        <!-- Initiate Items API assessment rendering, using the JSON blob of signed params. -->
-        <script>
+                <h4> SCORES <span class="badge badge-warning scores">0</span></h4>
+                <p> TIME REMAINING <span class="badge badge-danger timer">0:00</span></p>
+                <div class="alert alert-warning answer-alert" role="alert"></div>
+                <button  type="button" class="btn btn-primary btn-answer"  data-original-title="Next" aria-label="Next Item 2"><span class="btn-label">CHECK ANSWER</span></button>
+
+            </div>
+            <div class="preloader w-100 h-100 p-5 mx-auto flex-column ">
+                LOADING ...
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%" ></div>
+                </div>
+            </div>
+            
+        </div>
+        <script> 
+            newGame();
             var itemsApp = LearnosityItems.init(
-                <?php echo $initOptions ?>
-            );
+                <?php echo $initOptions ?>,
+                {
+                    readyListener() {
+                        gameStart();
+                    },
+                    errorListener(err) {
+                        console.log('Error', err);
+                    }
+                }
+            ); 
         </script>
+
     </body>
 </html>
