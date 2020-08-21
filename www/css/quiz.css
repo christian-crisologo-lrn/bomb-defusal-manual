@@ -104,3 +104,13 @@ body {
 .mastfoot {
   color: rgba(255, 255, 255, .5);
 }
+
+
+
+/* Learnosity */
+.lrn_cloze_response{
+  border: red!important;;
+}
+.lrn{
+  color: white!important;
+}
