@@ -2,12 +2,14 @@
 const MAX_TIME = 240;
 let currentQuestionIndex = -1; 
 let isGameOver = false;
+let timeRemaining = 0;
+let gameLevel = 1;
 
 const newGame = () => {
     $('.question-container').hide(); 
     $('.answer-alert').hide();
     $('.btn-answer').hide();
-    $('reports-container').hide();
+    $('.reports-container').hide();
 } 
 
 function secondsToMinute(d) { 
@@ -66,17 +68,37 @@ const submit = () =>{
     itemsApp.submit(submitSettings);
 }
 
+const showReport = (status)=>{
+    const responseStatus = status === 'lose' ? "BOMB EXPLODED!!!!" : "GOOD JOB! BOMB DEFUSED";
+    const scores = Object.values(itemsApp.getScores()).reduce(
+        (accumulator, current) => accumulator + (current.score || 0),
+        0
+      );
+    const attempts = (itemsApp.attemptedItems() || []).length;
+    $('.reports-container').show();
+    $('.reports-container').addClass( status === 'lose' ? 'alert-danger' : 'alert-success' )
+    $('.report-status').html(responseStatus);
+    $('.report-scores').html(scores);
+    $('.report-attempted').html(attempts); 
+    $('.report-time').html(timeRemaining); 
+    $('.scores').hide();
+    $('.timer').hide();
+    $('.answer-alert').hide();
+    $('.btn-answer').hide(); 
+    console.log('#CC xx ');
+}
+
 const gameOver = (status = 'lose')=> {
     isGameOver = true;
     $('.learnosity-item').hide();
     $('.btn-answer').hide();
-    const response = status === 'lose' ? "BOMB EXPLODED!!!!" : "GOOD JOB! BOMB DEFUSED";
-    //
-    submit();
-    $('reports-container').show();
+    // update scores
+    showReport(status);
+    submit();  
 }
 
-const gameStart = ()=>{ 
+const gameStart = (level = 1)=>{ 
+    gameLevel = level;
     const questions = itemsApp.getQuestions(); 
     const totalQuestions = Object.keys(questions).length;
 
@@ -85,6 +107,11 @@ const gameStart = ()=>{
         const currentQuestion = itemsApp.question(currentQuestionId);
         const isCorrect = currentQuestion.isAttempted() && currentQuestion.isValid();
         const response  = isCorrect ? "CORRECT!" : "WRONG!"; 
+        // if game level hard
+        if(gameLevel>1 && !isCorrect){
+            gameOver('lose');
+            return;
+        }
 
         $('.answer-alert').html(response).show();
         if( isCorrect){
@@ -101,6 +128,7 @@ const gameStart = ()=>{
 
     nextQuestion();
     timer(MAX_TIME, (seconds)=>{
+        timeRemaining = seconds;
         if(seconds<=0){
             gameOver('lose');
         }

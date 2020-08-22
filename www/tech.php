@@ -78,8 +78,24 @@
         <!-- Load the Items API library. -->
         <script src="https://items.learnosity.com/"></script>
         <script src="game.js"></script>
+
+
+
         <div class="cover-container  w-100 h-100 p-3 mx-auto flex-column">
             <h1 class="center">Bomb defusal</h1>
+ 
+
+            <div class="reports-container  alert alert-success" role="alert">
+                <h4 class="alert-heading report-status"></h4>
+                <p> FINAL SCORES  : <span id="report-scores">0</span> </p>
+                <p>  ATTEMPTS : <span id="report-attempted">0</span> </p>
+                <p> TIME REMAINING : <span id="report-time">0:00</span> </p>
+                <hr>
+                <p class="mb-0">
+                    <a  type="button" class="btn btn-warning btn-try-again"  data-original-title="try again" aria-label="try again" href="./quiz.php" title="Try again!" >  TRY AGAIN</a>
+                </p>
+            </div>
+
             <div class="question-container inner cover">
                 <span class="learnosity-item" data-reference="LRN_DEFUSE_HASH_1"></span>
                 <span class="learnosity-item" data-reference="LRN_DEFUSE_PATTERN_1"></span>
@@ -88,12 +104,13 @@
                 <span class="learnosity-item" data-reference="LRN_DEFUSE_WORD_1"></span> 
                 <span class="learnosity-item" data-reference="LRN_DEFUSE_HOMONYM_1"></span> 
 
-                <h4> SCORES <span class="badge badge-warning scores">0</span></h4>
+                <h4> SCORE <span class="badge badge-warning scores">0</span></h4>
                 <p> TIME REMAINING <span class="badge badge-danger timer">0:00</span></p>
                 <div class="alert alert-warning answer-alert" role="alert"></div>
-                <button  type="button" class="btn btn-primary btn-answer"  data-original-title="Next" aria-label="Next Item 2"><span class="btn-label">CHECK ANSWER</span></button>
+                <button  type="button" class="btn btn-primary btn-answer"  data-original-title="Next" aria-label="Next Item 2"><span class="btn-label">DEFUSE BOMB</span></button>
 
             </div>
+
             <div class="preloader w-100 h-100 p-5 mx-auto flex-column ">
                 LOADING ...
                 <div class="progress">
@@ -108,7 +125,7 @@
                 <?php echo $initOptions ?>,
                 {
                     readyListener() {
-                        gameStart();
+                        gameStart(2);
                     },
                     errorListener(err) {
                         console.log('Error', err);

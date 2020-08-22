@@ -27,14 +27,16 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="/css/quiz.css" rel="stylesheet">
+    <link href="/css/quiz.css" rel="stylesheet"> 
+
     
   </head>
   <body class="text-center">
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"  > 
 
-      <main role="main" class="inner cover">
+      <main role="main" class="inner cover" >
+      <img src="images/cover.png" class="img-fluid" />
         <h1 class="cover-heading">Ready to defuse?</h1>
         <p class="lead">Are you the sort of person who is chomping at the bit to press buttons and possibly blow up after following bad adive? Then you should be the</p>
         <p class="lead">
@@ -47,8 +49,7 @@
       </main>
 
     </div>
-
-    
+ 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
