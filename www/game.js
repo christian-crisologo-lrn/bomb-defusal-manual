@@ -6,11 +6,14 @@ let timeRemaining = 0;
 let gameLevel = 1;
 
 const newGame = () => {
+    $('.preloader').show();
     $('.question-container').hide(); 
-    $('.answer-alert').hide();
     $('.btn-answer').hide();
-    $('.reports-container').hide();
-} 
+    $('.reports-container').hide(); 
+    $('.select-level').hide();
+    $('.alert-correct').hide();
+    $('.alert-wrong').hide();
+}  
 
 function secondsToMinute(d) { 
     const m = Math.floor(d % 3600 / 60);
@@ -40,27 +43,23 @@ const updateScores= () => {
 
 const nextQuestion = () => {
     currentQuestionIndex++;
-    $('.question-container').show();
+    $('.question-container').fadeIn('slow');
     $('.learnosity-item').hide();
     $('.btn-answer').show();
-    $('.answer-alert').hide();
+    $('.alert-correct').hide();
+    $('.alert-wrong').hide();
     $(`.question-container div:nth-child(${currentQuestionIndex+1})`).show();
 }
 
 const submit = () =>{
     var submitSettings = {
         success: function (response_ids) {
-            // Receives a list of the submitted session responses as [response_id]
             console.log("submit has been successful", response_ids);
         },
         error: function (e) {
-            // Receives the event object defined in the Event section
             console.log("submit has failed",e);
         },
-        progress: function (e) {
-            // Client custom progress event handler
-            // e: uses the progress object defined bellow
-            // See the Progress Event section for more information on this
+        progress: function (e) { 
             console.log("progress",e);
         }
     };
@@ -69,7 +68,7 @@ const submit = () =>{
 }
 
 const showReport = (status)=>{
-    const responseStatus = status === 'lose' ? "BOMB EXPLODED!!!!" : "GOOD JOB! BOMB DEFUSED";
+    const responseStatus = status === 'lose' ? "BOMB EXPLODED!!!!" : "GOOD JOB! The bomb has been defused!";
     const scores = Object.values(itemsApp.getScores()).reduce(
         (accumulator, current) => accumulator + (current.score || 0),
         0
@@ -81,11 +80,7 @@ const showReport = (status)=>{
     $('.report-scores').html(scores);
     $('.report-attempted').html(attempts); 
     $('.report-time').html(timeRemaining); 
-    $('.scores').hide();
-    $('.timer').hide();
-    $('.answer-alert').hide();
-    $('.btn-answer').hide(); 
-    console.log('#CC xx ');
+    $('.question-container ').hide();
 }
 
 const gameOver = (status = 'lose')=> {
@@ -97,6 +92,19 @@ const gameOver = (status = 'lose')=> {
     submit();  
 }
 
+const initGame = ()=>{
+    $('.preloader').fadeOut();
+    $('.select-level').animate({ "left": "+=50px" }  ).fadeIn('slow');
+    $('.btn-level-1').on('click',()=>{
+        gameStart(1);
+        $('.select-level').hide();
+    })
+    $('.btn-level-2').on('click',()=>{
+        gameStart(2);
+        $('.select-level').hide();
+    })
+}
+
 const gameStart = (level = 1)=>{ 
     gameLevel = level;
     const questions = itemsApp.getQuestions(); 
@@ -106,22 +114,28 @@ const gameStart = (level = 1)=>{
         const currentQuestionId = Object.keys(questions)[currentQuestionIndex];
         const currentQuestion = itemsApp.question(currentQuestionId);
         const isCorrect = currentQuestion.isAttempted() && currentQuestion.isValid();
-        const response  = isCorrect ? "CORRECT!" : "WRONG!"; 
+ 
         // if game level hard
         if(gameLevel>1 && !isCorrect){
             gameOver('lose');
             return;
         }
-
-        $('.answer-alert').html(response).show();
+        $('.alert-wrong').hide();
+        $('.alert-correct').hide();
         if( isCorrect){
+            $('.alert-correct').fadeIn();
             updateScores();
-            $('.btn-answer').hide();
+            $('.btn-answer').fadeOut();
             if(currentQuestionIndex>=totalQuestions-1){
                 gameOver('win');
             }else{
                setTimeout(nextQuestion,2000); 
             }
+        }else{
+            $('.alert-wrong').show();
+            $(".explosive-effect:hidden").fadeIn( function() {
+                $(this).fadeOut();
+            });
         }
    
     });
@@ -135,5 +149,6 @@ const gameStart = (level = 1)=>{
         $('.timer').html(secondsToMinute(seconds));
     });
     //
-    $('.preloader').hide();
+  
+
 } 

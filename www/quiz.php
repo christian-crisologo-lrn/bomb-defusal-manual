@@ -4,53 +4,42 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
-    
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+    <title>BOMB DEFUSAL MANUAL V1.0.0</title>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
     <!-- Custom styles for this template -->
     <link href="/css/quiz.css" rel="stylesheet"> 
-
+    <link href="/css/bg.css" rel="stylesheet"> 
     
   </head>
-  <body class="text-center">
+  <body class="text-center explode-bg">
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"  > 
+    <div class="cover-container w-100 h-100 mx-auto flex-column"  > 
 
       <main role="main" class="inner cover" >
-      <img src="images/cover.png" class="img-fluid" />
-        <h1 class="cover-heading">Ready to defuse?</h1>
-        <p class="lead">Are you the sort of person who is chomping at the bit to press buttons and possibly blow up after following bad adive? Then you should be the</p>
-        <p class="lead">
-          <a href="tech.php" class="btn btn-lg btn-secondary btn-block">Bomb Technican</a>
-        </p>
-        <p class="lead">Or are you the type of person happy to help knowing then when it all goes wrong someone else will die? Then you should just use the </p>
-        <p class="lead">
-          <a href="manual.php" class="btn btn-lg btn-secondary btn-block">Manual</a>
-        </p>
+        <img src="images/cover.png" class="img-fluid" />
+        <h1 class="cover-heading ff">Ready to defuse?</h1>
+        <div class="player-selections">
+          <div class="p-4 tech-b1"> 
+              <a href="tech.php" class="tech-btn" ><img src="images/tech.png" href="tech.php" style="width:225px" /></a>
+              <a href="tech.php" class="btn btn-lg btn-secondary btn-block tech-btn">Bomb Technican</a>
+              <p class="p-2" >Are you the sort of person who is chomping at the bit to press buttons and possibly blow up after following bad adive? Then you should be the</p>
+          </div>
+          <div class="p-4">
+            <a href="manual.php"> <img src="images/manual.png" href="manual.php" style="width:225px" /></a>
+            <a href="manual.php" class="btn btn-lg btn-secondary btn-block">Manual</a>
+            <p class="p-2" >Or are you the type of person happy to help knowing then when it all goes wrong someone else will die? Then you should just use the </p>
+          </div>
+         </div>
+   
       </main>
 
     </div>
  
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

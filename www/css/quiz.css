@@ -32,16 +32,53 @@ body {
 
 body {
   display: -ms-flexbox;
-  display: flex;
   color: #fff;
-  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5); 
+  height: 100vh;
+  height: 100%; 
+}
+
+.ff{
+  font-family: "Fredoka One", "Roboto"; 
+}
+
+.explosive-effect{
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  position: absolute;
+  bottom: 100px;
+  left: auto;
+  background: url('../images/boom.gif') no-repeat center;
+  background-size: auto;
+}
+
+
+.explode-bg{
+  background: url('../images/bg.png') no-repeat center top  ;
+  background-size: 90% 98%;
 }
 
 .cover-container {
-  max-width: 42em;
+  width: 80%;
 }
 
+
+ 
+  @media screen and (max-width: 450px) {
+    .player-selections{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  
+  @media screen and (min-width: 451px) {
+    .player-selections{
+      display: flex;
+      flex-direction: row;
+    }
+  }
 
 /*
  * Header
@@ -113,4 +150,10 @@ body {
 }
 .lrn{
   color: white!important;
+}
+
+.ball {
+  position: absolute;
+  border-radius: 100%;
+  opacity: 0.7;
 }
