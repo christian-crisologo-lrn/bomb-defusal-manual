@@ -6,7 +6,8 @@ let isGameOver = false;
 const newGame = () => {
     $('.question-container').hide(); 
     $('.answer-alert').hide();
-    $('.btn-answer').hide(); 
+    $('.btn-answer').hide();
+    $('reports-container').hide();
 } 
 
 function secondsToMinute(d) { 
@@ -44,16 +45,38 @@ const nextQuestion = () => {
     $(`.question-container div:nth-child(${currentQuestionIndex+1})`).show();
 }
 
+const submit = () =>{
+    var submitSettings = {
+        success: function (response_ids) {
+            // Receives a list of the submitted session responses as [response_id]
+            console.log("submit has been successful", response_ids);
+        },
+        error: function (e) {
+            // Receives the event object defined in the Event section
+            console.log("submit has failed",e);
+        },
+        progress: function (e) {
+            // Client custom progress event handler
+            // e: uses the progress object defined bellow
+            // See the Progress Event section for more information on this
+            console.log("progress",e);
+        }
+    };
+    
+    itemsApp.submit(submitSettings);
+}
+
 const gameOver = (status = 'lose')=> {
     isGameOver = true;
     $('.learnosity-item').hide();
     $('.btn-answer').hide();
     const response = status === 'lose' ? "BOMB EXPLODED!!!!" : "GOOD JOB! BOMB DEFUSED";
-    $('.answer-alert').html(response).show(); 
+    //
+    submit();
+    $('reports-container').show();
 }
 
 const gameStart = ()=>{ 
-    
     const questions = itemsApp.getQuestions(); 
     const totalQuestions = Object.keys(questions).length;
 
