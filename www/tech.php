@@ -77,13 +77,14 @@
         <!-- Items API will render the assessment app into this div. -->
         <div id="learnosity_assess"></div>
         <div  class="explosive-effect"  style="display:none" ></div>
+        <div class="blinking-effect" ></div>
         <div class="alert-response-wrapper" style="display:none">
-            <div class="alert alert-success alert-correct " role="alert">
-                <h4><i class="fa fa-check-circle"></i> CORRECT!</h4>
-            </div>
-            <div class="alert alert-danger alert-wrong " role="alert">
-                <h4><i class="fa fa-bomb"></i> WRONG!</h4>
-            </div>
+            <span class=" alert-correct " role="alert" style="">
+                 ☺️  CORRECT!
+            </span>
+            <span class=" alert-wrong " role="alert" style="">
+                ☠️ WRONG!
+            </span>
         </div>
         <!-- Load the Items API library. -->
         <script src="https://items.learnosity.com/"></script>
@@ -96,14 +97,14 @@
                 </div>
             
                 <div class=" f-row justify-content-between top-stats-box" style="display:flex">
-                    <div> SCORE <span class="badge badge-warning scores">0</span></div>
-                    <div> TIME REMAINING <span class="badge badge-danger timer">0:00</span></div>
+                    <div> 🏆 SCORE <span class="badge badge-warning scores">0</span></div>
+                    <div> ⌚ TIME REMAINING <span class="badge badge-danger timer">0:00</span></div>
                 </div>
                 
                 <div class="select-level p-5 pt-5" >
                     <h5> Select level :</h5>
-                    <a class="btn btn-lg btn-warning btn-block btn-level-1">Beginner <i class="fa fa-star"></i></a>
-                    <a class="btn btn-lg btn-danger btn-block btn-level-2">Expert <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></a>
+                    <a class="btn btn-lg btn-warning btn-block btn-level-1">Beginner ⭐</a>
+                    <a class="btn btn-lg btn-danger btn-block btn-level-2">Expert ⭐⭐</a>
                 </div>
                 <div class="reports-container  alert alert-success" role="alert">
                     <h4 class="alert-heading report-status"></h4>
@@ -139,7 +140,10 @@
   
          <!-- AUDIOS -->
       
-        <audio src="sounds/explosion.mp3" id="explosion-sound"></audio>
+        <audio   id="explosion-sound">
+            <source src="sounds/explosion.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+        </audio>
 
         <audio id="bg-sound" autoplay loop  >
             <source src="sounds/bg-ost.mp3" type="audio/mpeg">

@@ -42,17 +42,7 @@ body {
   font-family: "Fredoka One", "Roboto"; 
 }
 
-.explosive-effect{
-  display: block;
-  width: 100%;
-  height: 100%;
-  z-index: 2000;
-  position: absolute;
-  bottom: 100px;
-  left: auto;
-  background: url('../images/boom.gif') no-repeat center;
-  background-size: auto;
-}
+
 
 
 .explode-bg{
@@ -158,6 +148,58 @@ body {
   opacity: 0.7;
 }
 
+ 
+.explosive-effect{
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  position: absolute;
+  bottom: 100px;
+  left: auto;
+  background: url('../images/boom.gif') no-repeat center;
+  background-size: auto;
+}
+
+.blinking-effect{
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 2100;
+  position: absolute; 
+  left: auto;
+  background: rgba(255,255,255,0.5);
+  background: radial-gradient(circle, rgba(255,255,255,0.6643032212885154) 0%, rgba(231,231,231,0.70) 100%);
+  background-size: auto;
+  animation: blinker 1s linear infinite;
+}
+
+ 
+
+@keyframes blinker {
+  10% {
+    opacity: 0;
+  }
+  20%{
+    opacity: 1;
+  }
+  40%{
+    opacity: 0;
+  }
+  60%{
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  90%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
 .alert-response-wrapper {
   z-index: 100;
   position: absolute;
@@ -175,6 +217,7 @@ body {
 }
 .alert-correct, .alert-wrong{
   top: -20%;
+  font-size: 36px;
 }
 
 .top-stats-box{
