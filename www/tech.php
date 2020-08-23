@@ -114,7 +114,7 @@
                     <p> Time finished : <span class="report-time badge badge-warning">0:00</span> </p>
                     <hr>
                     <p class="mb-0">
-                        <a  type="button" class="btn btn-warning btn-try-again"  data-original-title="try again" aria-label="try again" href="./quiz.php" title="Try again!" >  TRY AGAIN</a>
+                        <a  type="button" class="btn btn-warning btn-try-again"  data-original-title="try again" aria-label="try again" href="./tech.php" title="Try again!" >  TRY AGAIN</a>
                     </p>
                 </div>
 
