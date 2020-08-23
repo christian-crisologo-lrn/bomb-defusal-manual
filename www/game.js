@@ -5,24 +5,53 @@ let isGameOver = false;
 let timeRemaining = 0;
 let gameLevel = 1;
 
+
+jQuery.fn.shake = function() {
+    this.each(function(i) {
+        $(this).css({
+            "position": "absolute"
+        });
+        const shake = 10;
+        for (var x = 1; x <= 3; x++) {
+            $(this).animate({
+                left: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px', 
+                top: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px'
+            }, 10).animate({
+                left: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px', 
+                top: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px'
+            }, 50).animate({
+                left: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px', 
+                top: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px'
+            }, 10).animate({
+                left: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px', 
+                top: Math.round(Math.random() * shake) - ((shake + 1) / 2) +'px'
+            }, 50);
+        }
+    });
+    return this;
+}
+
 const initBgSounds = () => {
     const audioControl =  document.getElementById("bg-sound"); 
     audioControl.volume = 0.5;
     $('.enable-sound').on('click',(e)=>{
         e.preventDefault();
-        console.log('#CC enable sounds ', audioControl);
         if( !audioControl.paused){
             audioControl.pause();
             $('.enable-sound').html('ON 🔈'); 
 
         }else{
-            console.log('#CC play ');
             $('.enable-sound').html('OFF 🔇');
             audioControl.play()
         }
     });
      
   }
+
+const playExplosionSound = ()=>{
+    const audioControl =  document.getElementById("explosion-sound"); 
+    audioControl.play()
+}
 
 const newGame = () => {
     $('.preloader').show();
@@ -45,14 +74,24 @@ const secondsToMinute = (d)=> {
 
 const showExplosions = (count=1)=>{
     let ctr = 0;
-   // while(ctr<count){
-        console.log('#CC ctr ',ctr);
-        $(".explosive-effect:hidden").fadeIn( () =>{
-            console.log('#CC done!');
-            $(".explosive-effect").fadeOut('slow');
-            ctr++;
+    
+    function loop(){
+       playExplosionSound();
+       $('.game-container').shake();
+       $(".blinking-effect").fadeIn();
+        $(".explosive-effect:hidden").fadeIn( 1000,() =>{
+            $(".explosive-effect").fadeOut(()=>{
+                ctr++;
+                $(".blinking-effect").hide();
+                if(ctr<count){
+                    loop();
+                    
+                } 
+            });
+          
         });
-  ///  }
+    }
+    loop();
 }
 
 const  timer = (seconds, cb) => {
@@ -87,7 +126,7 @@ const nextQuestion = () => {
     $('.alert-wrong').hide();
     $('.question-container').fadeIn();
     $('.top-stats-box ').animate({ "top": "+=50px" }  ).fadeIn('fast',()=>{
-        $(`.question-container div:nth-child(${currentQuestionIndex+1})`).fadeIn('slow',()=>{
+        $(`.question-container div:nth-child(${currentQuestionIndex+1})`).fadeIn(1000,()=>{
             $('.btn-answer').fadeIn();
         });
     });
@@ -118,9 +157,8 @@ const showReport = (status)=>{
         (accumulator, current) => accumulator + (current.score || 0),
         0
       );
-
     if(!isWin){
-        showExplosions(4);
+        showExplosions(2);
     }
     const attempts = (itemsApp.attemptedItems() || []).length;
 
@@ -137,8 +175,8 @@ const gameOver = (status = 'lose')=> {
     isGameOver = true;
     $('.learnosity-item').hide();
     $('.btn-answer').hide();
-    $('.top-stats-box').animate({ "top": "0" }  ).fadeOut('slow');
-
+    $('.top-stats-box').fadeOut('slow');
+    $('.alert-response-wrapper').hide();
     // update scores
     showReport(status);
     submit();  
@@ -163,6 +201,7 @@ const gameStart = (level = 1)=>{
     const totalQuestions = Object.keys(questions).length;
 
     $('.btn-answer').on('click',()=>{
+     
         const currentQuestionId = Object.keys(questions)[currentQuestionIndex];
         const currentQuestion = itemsApp.question(currentQuestionId);
         const isCorrect = currentQuestion.isAttempted() && currentQuestion.isValid();
@@ -173,20 +212,22 @@ const gameStart = (level = 1)=>{
             gameOver('lose');
             return;
         }
+
         $('.alert-response-wrapper').show();
         $('.alert-wrong').hide();
         $('.alert-correct').hide();
-        $('.btn-answer').fadeOut();
+     
         if( isCorrect){
             updateScores();
             if(!isLastQuestion){
-                $('.alert-correct').fadeIn('slow',()=>{
-                    setTimeout(()=>$('.alert-response-wrapper').fadeOut('slow'),1000);
+                $('.alert-correct').fadeIn('fast',()=>{
+                    setTimeout(()=>$('.alert-response-wrapper').fadeOut('fast'),1000);
                 });
            }
             if(isLastQuestion){
                 gameOver('win');
             }else{
+                $('.btn-answer').fadeOut();
                setTimeout(nextQuestion,2000); 
             }
         }else{
