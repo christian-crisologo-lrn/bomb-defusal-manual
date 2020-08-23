@@ -73,17 +73,33 @@
         <link href="/css/quiz.css" rel="stylesheet">
     </head>
     <body class="ff">
- 
+        
         <!-- Items API will render the assessment app into this div. -->
         <div id="learnosity_assess"></div>
         <div  class="explosive-effect"  style="display:none" ></div>
-
+        <div class="alert-response-wrapper" style="display:none">
+            <div class="alert alert-success alert-correct " role="alert">
+                <h4><i class="fa fa-check-circle"></i> CORRECT!</h4>
+            </div>
+            <div class="alert alert-danger alert-wrong " role="alert">
+                <h4><i class="fa fa-bomb"></i> WRONG!</h4>
+            </div>
+        </div>
         <!-- Load the Items API library. -->
         <script src="https://items.learnosity.com/"></script>
         <script src="game.js"></script> 
-
-            <div class="game-container text-center w-100 h-100 p-4  mx-auto flex-column">
-                <p class="text-left bg-primary ">&nbsp;&nbsp;Bomb Defusal Manual</p>
+     
+            <div class="game-container text-center w-100 h-100 pl-4 pr-4 pt-2  mx-auto flex-column">
+                <div class="title-header  bg-primary f-row d-flex justify-content-between  ">
+                    <div class="text-left pt-1">&nbsp;&nbsp;💣 Bomb Defusal Manual</div>
+                    <button class="btn btn-secondary enable-sound">ON 🔈 </button> 
+                </div>
+            
+                <div class=" f-row justify-content-between top-stats-box" style="display:flex">
+                    <div> SCORE <span class="badge badge-warning scores">0</span></div>
+                    <div> TIME REMAINING <span class="badge badge-danger timer">0:00</span></div>
+                </div>
+                
                 <div class="select-level p-5 pt-5" >
                     <h5> Select level :</h5>
                     <a class="btn btn-lg btn-warning btn-block btn-level-1">Beginner <i class="fa fa-star"></i></a>
@@ -91,9 +107,10 @@
                 </div>
                 <div class="reports-container  alert alert-success" role="alert">
                     <h4 class="alert-heading report-status"></h4>
-                    <p> FINAL SCORES  : <span id="report-scores">0</span> </p>
-                    <p> ATTEMPTS : <span id="report-attempted">0</span> </p>
-                    <p> TIME REMAINING : <span id="report-time">0:00</span> </p>
+                    <img src="" class="report-img" />
+                    <p > Final scores : <span class="report-scores badge badge-warning ">0</span> </p>
+                    <p> No. of attempts : <span class="report-attempted badge badge-warning">0</span> </p>
+                    <p> Time finished : <span class="report-time badge badge-warning">0:00</span> </p>
                     <hr>
                     <p class="mb-0">
                         <a  type="button" class="btn btn-warning btn-try-again"  data-original-title="try again" aria-label="try again" href="./quiz.php" title="Try again!" >  TRY AGAIN</a>
@@ -109,16 +126,9 @@
                     <span class="learnosity-item" data-reference="LRN_DEFUSE_HOMONYM_1"></span> 
                     <button  type="button" class="btn btn-lg btn-warning btn-answer"  ><span class="btn-label">SUBMIT</span></button>
                     <hr/>
-                    <p> SCORE <span class="badge badge-warning scores">0</span></p>
-                    <h5> TIME REMAINING <span class="badge badge-danger timer">0:00</span></h5>
-                    <div class="alert alert-success alert-correct " role="alert">
-                        <h4><i class="fa fa-check-circle"></i> CORRECT!</h4>
-                    </div>
-                    <div class="alert alert-danger alert-wrong " role="alert">
-                        <h4><i class="fa fa-bomb"></i> WRONG!</h4>
-                    </div>
-                </div>
-
+                   
+                </div> 
+            
                 <div class="preloader w-100 h-100 p-5 mx-auto flex-column ">
                     LOADING ...
                     <div class="progress">
@@ -126,6 +136,15 @@
                     </div>
                 </div>
             </div>
+  
+         <!-- AUDIOS -->
+      
+        <audio src="sounds/explosion.mp3" id="explosion-sound"></audio>
+
+        <audio id="bg-sound" autoplay loop  >
+            <source src="sounds/bg-ost.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
 
         <script>  
          
@@ -142,7 +161,8 @@
                 }
             ); 
         </script>
-     
+
+
 
     </body>
 </html>
