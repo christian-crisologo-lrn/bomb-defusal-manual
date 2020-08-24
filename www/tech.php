@@ -73,7 +73,7 @@
         <link href="/css/quiz.css" rel="stylesheet">
     </head>
     <body class="ff">
-        
+
         <!-- Items API will render the assessment app into this div. -->
         <div id="learnosity_assess"></div>
         <div  class="explosive-effect"  style="display:none" ></div>
@@ -130,6 +130,15 @@
                    
                 </div> 
             
+
+                <div class="time-bomb"  >
+                    <div class="time-bomb-wrapper">
+                        <img src="images/flame.gif" class="time-bomb-spark" />
+                        <div class="time-bomb-string" class="time-bomb-string" ></div>
+                        <div class="time-bomb-string-bg" class="time-bomb-string" ></div>
+                    </div>
+                </div>
+                
                 <div class="preloader w-100 h-100 p-5 mx-auto flex-column ">
                     LOADING ...
                     <div class="progress">
