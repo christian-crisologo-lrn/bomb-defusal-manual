@@ -5,18 +5,7 @@ let isGameOver = false;
 let timeRemaining = 0;
 let gameLevel = 1;
 let questionReady = false;
-
-jQuery.fn.enterKey = function (fnc) {
-    return this.each(function () {
-        $(this).keypress(function (ev) {
-            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
-            if (keycode == '13') {
-                fnc.call(this, ev);
-            }
-        })
-    })
-}
-
+ 
 jQuery.fn.shake = function() {
     this.each(function(i) {
         $(this).css({
@@ -74,6 +63,7 @@ const newGame = () => {
     $('.alert-correct').hide();
     $('.alert-wrong').hide();
     $('.top-stats-box').hide();
+    $('.time-bomb').hide();
     initBgSounds();
 }  
 
@@ -190,6 +180,8 @@ const gameOver = (status = 'lose')=> {
     $('.btn-answer').hide();
     $('.top-stats-box').fadeOut('slow');
     $('.alert-response-wrapper').hide();
+    $('.time-bomb').fadeOut();
+
     // update scores
     showReport(status);
     submit();  
@@ -206,7 +198,29 @@ const initGame = ()=>{
         gameStart(2);
         $('.select-level').hide();
     })
+    $('.time-bomb').hide();
+
 }
+
+const toCssValue = (div, type="px") =>  div.substr(0,div.indexOf(type))
+
+const  timeBomb = (seconds,stWidth) => {
+    // if(isGameOver) return false;
+    //
+    let _timeRemaining = seconds;
+
+    setTimeout(function() {
+    const spark  = $('.time-bomb-spark');
+    const newStringWidth = (seconds/MAX_TIME) * toCssValue(stWidth);
+    
+    $('.time-bomb-string').css("width",  newStringWidth+'px');
+    spark.css("left",  (toCssValue($('.time-bomb-string').css('left')) -  toCssValue(spark.css('width'))/2) + 'px'  );
+    if (_timeRemaining > 0) {
+    timeBomb(_timeRemaining - 1, stWidth); 
+    }
+    }, 1000);
+  }
+
 
 const gameStart = (level = 1)=>{ 
     gameLevel = level;
@@ -268,6 +282,8 @@ const gameStart = (level = 1)=>{
         $('.timer').html(secondsToMinute(seconds));
     });
     //
-  
+    $('.time-bomb').fadeIn();
+   timeBomb(MAX_TIME,   $('.time-bomb-string').css('width'));
+    
 
 } 
