@@ -225,3 +225,10 @@ body {
   border-bottom: 1px dashed gray; 
   margin-bottom: 15px;
 }
+ 
+.report-win{
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(108,255,0,0.60) 76%, rgba(47,184,0,0.80) 100%);
+}
+.report-lose{
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(164,22,22,0.60) 76%, rgba(255,0,0,0.80) 100%);
+}

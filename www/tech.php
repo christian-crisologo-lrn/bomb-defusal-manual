@@ -106,14 +106,14 @@
                     <a class="btn btn-lg btn-warning btn-block btn-level-1">Beginner ⭐</a>
                     <a class="btn btn-lg btn-danger btn-block btn-level-2">Expert ⭐⭐</a>
                 </div>
-                <div class="reports-container  alert alert-success" role="alert">
+                <div class="reports-container mt-2 pt-2" role="alert">
                     <h4 class="alert-heading report-status"></h4>
                     <img src="" class="report-img" />
-                    <p > Final scores : <span class="report-scores badge badge-warning ">0</span> </p>
-                    <p> No. of attempts : <span class="report-attempted badge badge-warning">0</span> </p>
-                    <p> Time finished : <span class="report-time badge badge-warning">0:00</span> </p>
+                    <p>Final scores : <span class="report-scores badge badge-warning ">0</span> </p>
+                    <p>No. of attempts : <span class="report-attempted badge badge-warning">0</span> </p>
+                    <p>Time finished : <span class="report-time badge badge-warning">0:00</span> </p>
                     <hr>
-                    <p class="mb-0">
+                    <p class="mb-2 pt-2" style="border-top: 1px dashed gray">
                         <a  type="button" class="btn btn-warning btn-try-again"  data-original-title="try again" aria-label="try again" href="./tech.php" title="Try again!" >  TRY AGAIN</a>
                     </p>
                 </div>
