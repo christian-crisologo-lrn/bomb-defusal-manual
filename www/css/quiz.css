@@ -239,11 +239,12 @@ body {
   position: relative;
 }
 .time-bomb-spark{
+    transition: all 0.5s ease;
     width: 52px;
     height: 52px;
     position: absolute;
     z-index: 2;
-    left: 0;
+    left: -22px;
     top: -6px;
 }
 .time-bomb-string{ 
@@ -254,11 +255,12 @@ body {
     top: 30px;
     right: 0px;
     opacity: .8;
+    transition: all 0.5s ease;
 }
 .time-bomb-string-bg{ 
   background: rgba(255,255,255,0.1);
   width: 100%;
-height: 4px;
+  height: 4px;
   position: absolute;
   top: 30px;
   right: 0px;
