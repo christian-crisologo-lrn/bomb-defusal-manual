@@ -4,7 +4,18 @@ let currentQuestionIndex = -1;
 let isGameOver = false;
 let timeRemaining = 0;
 let gameLevel = 1;
+let questionReady = false;
 
+jQuery.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+}
 
 jQuery.fn.shake = function() {
     this.each(function(i) {
@@ -119,6 +130,7 @@ const updateScores= () => {
   }
 
 const nextQuestion = () => {
+    questionReady = false;
     currentQuestionIndex++; 
     $('.learnosity-item').hide();
     $('.alert-response-wrapper').hide();
@@ -126,11 +138,11 @@ const nextQuestion = () => {
     $('.alert-wrong').hide();
     $('.question-container').fadeIn();
     $('.top-stats-box ').animate({ "top": "+=50px" }  ).fadeIn('fast',()=>{
-        $(`.question-container div:nth-child(${currentQuestionIndex+1})`).fadeIn(1000,()=>{
-            $('.btn-answer').fadeIn();
-        });
+        $(`.question-container div:nth-child(${currentQuestionIndex+1})`).fadeIn(1000);
     });
-
+    $('.btn-answer').fadeIn(3000,()=>{
+        questionReady = true;
+    });
 
 }
 
@@ -152,7 +164,7 @@ const submit = () =>{
 
 const showReport = (status)=>{
     const isWin = status === 'win';
-    const responseStatus = isWin ?  "🎖️ GOOD JOB SOLDIER!! 🎖️" : "☠️ MISSION FAILED!! ☠️ " ;
+    const responseStatus = isWin ?  "🎖️ MISSION SUCCESS!! 🎖️" : "☠️ MISSION FAILED!! ☠️ " ;
     const scores = Object.values(itemsApp.getScores()).reduce(
         (accumulator, current) => accumulator + (current.score || 0),
         0
@@ -164,11 +176,12 @@ const showReport = (status)=>{
 
     $('.report-img').attr('src', isWin ? "images/tech-win.png" : "images/tech-lose.png")
     $('.reports-container').show();
-    $('.reports-container').addClass( isWin  ? 'alert-success'  : 'alert-danger' )
+    $('.reports-container').addClass( isWin  ? 'report-win'  : 'report-lose' )
     $('.report-status').html(responseStatus);
     $('.report-scores').html(toScores(scores));
     $('.report-attempted').html(attempts); 
     $('.report-time').html(secondsToMinute(timeRemaining)); 
+
 }
 
 const gameOver = (status = 'lose')=> {
@@ -200,8 +213,7 @@ const gameStart = (level = 1)=>{
     const questions = itemsApp.getQuestions(); 
     const totalQuestions = Object.keys(questions).length;
 
-    $('.btn-answer').on('click',()=>{
-     
+    const runAnswer = ()=>{
         const currentQuestionId = Object.keys(questions)[currentQuestionIndex];
         const currentQuestion = itemsApp.question(currentQuestionId);
         const isCorrect = currentQuestion.isAttempted() && currentQuestion.isValid();
@@ -227,6 +239,7 @@ const gameStart = (level = 1)=>{
             if(isLastQuestion){
                 gameOver('win');
             }else{
+          
                 $('.btn-answer').fadeOut();
                setTimeout(nextQuestion,2000); 
             }
@@ -236,8 +249,15 @@ const gameStart = (level = 1)=>{
             });
             showExplosions(1);
         }
-   
+    }
+
+    $(document).on('keypress', (e)=>{
+        if(e.which === 13 && questionReady) {
+            runAnswer();
+        }
     });
+
+    $('.btn-answer').on('click',runAnswer);
 
     nextQuestion();
     timer(MAX_TIME, (seconds)=>{
