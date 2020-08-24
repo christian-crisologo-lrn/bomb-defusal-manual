@@ -7,10 +7,10 @@ Learnosity bootcamp demo project (#bootcamp2020)
 Inspired from the game [Bomb Manual](https://www.bombmanual.com/) using the Learnosity API.
 
 
-### Prerequisite
+#### Prerequisite
   Make sure you have `php` framework and library in your system
 
-### How to run the App
+#### How to run the App
 To run the app, follow the steps
 1. Clone the repo
 2. Go to `www` folder
@@ -19,7 +19,7 @@ To run the app, follow the steps
   php -S localhost:8000
 ```
 
-### Game instruction
+#### Game instruction
 The game is playable with 2 players, 1 player is `Tech` and the other `Manual`.
 - Tech - the bomb defuser who take instruction from the `Manual` and solve the puzzle to defuse the bomb. The `Tech` will get options with no questions so he has to rely with the `Manual` instructions.
 - Manual - the person who will help the Tech to give the clues and help the solved the puzzles. The `Manual` has only the manual or set of instruction but has no idea what's the option so he has to help the `Tech` finding the best solution.
@@ -31,7 +31,7 @@ The game is playable with 2 players, 1 player is `Tech` and the other `Manual`.
 4. Solve the puzzles every question. The `Manual` should find the best solution in the set of possible solution in the Manual.
 5. Finish the game before the time runs out or the bomb explode
 
-### Player with 1 Player
+#### Player with 1 Player
 1. Open 2 tabs for `Tech` and `Manual`
 2. Play the `Tech` with the game level desire
 3. In every question or puzzle, open the `Manual` to see the possible options
