@@ -208,16 +208,16 @@ const  timeBomb = (seconds,stWidth) => {
     // if(isGameOver) return false;
     //
     let _timeRemaining = seconds;
-
-    setTimeout(function() {
-    const spark  = $('.time-bomb-spark');
-    const newStringWidth = (seconds/MAX_TIME) * toCssValue(stWidth);
     
-    $('.time-bomb-string').css("width",  newStringWidth+'px');
-    spark.css("left",  (toCssValue($('.time-bomb-string').css('left')) -  toCssValue(spark.css('width'))/2) + 'px'  );
-    if (_timeRemaining > 0) {
-    timeBomb(_timeRemaining - 1, stWidth); 
-    }
+    setTimeout(function() {
+        const spark  = $('.time-bomb-spark');
+        const newStringWidth = (seconds/MAX_TIME) * toCssValue(stWidth);
+        
+        $('.time-bomb-string').css("width",  newStringWidth+'px');
+        spark.css("left",  (toCssValue($('.time-bomb-string').css('left')) -  toCssValue(spark.css('width'))/2) + 'px'  );
+        if (_timeRemaining > 0) {
+        timeBomb(_timeRemaining - 1, stWidth); 
+        }
     }, 1000);
   }
 
