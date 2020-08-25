@@ -214,7 +214,7 @@ const  timeBomb = (seconds,stWidth) => {
         const newStringWidth = (seconds/MAX_TIME) * toCssValue(stWidth);
         
         $('.time-bomb-string').css("width",  newStringWidth+'px');
-        spark.css("left",  (toCssValue($('.time-bomb-string').css('left')) -  toCssValue(spark.css('width'))/2) + 'px'  );
+        spark.css("left",  (toCssValue($('.time-bomb-string').css('left')) -  (toCssValue(spark.css('width'))-12)/2) + 'px'  );
         if (_timeRemaining > 0) {
         timeBomb(_timeRemaining - 1, stWidth); 
         }
