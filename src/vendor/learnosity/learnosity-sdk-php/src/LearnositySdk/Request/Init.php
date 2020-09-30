@@ -285,7 +285,7 @@ class Init
                     } elseif (isset($this->requestPacket['questionsApiActivity']['domain'])) {
                         $signatureParts['domain'] = $this->requestPacket['questionsApiActivity']['domain'];
                     } else {
-                        $signatureParts['domain'] = 'assess.learnosity.com';
+                        $signatureParts['domain'] = 'assess-cn-au.learnosity.com';
                     }
                     $signatureParts['timestamp'] = $this->securityPacket['timestamp'];
                     if (isset($this->securityPacket['expires'])) {

@@ -71,7 +71,7 @@
         <div id="learnosity_assess"></div>
 
         <!-- Load the Items API library. -->
-        <script src="https://items.learnosity.com/"></script>
+        <script src="https://items-cn-au.learnosity.com/"></script>
 
         <!-- Initiate Items API assessment rendering, using the JSON blob of signed params. -->
         <script>

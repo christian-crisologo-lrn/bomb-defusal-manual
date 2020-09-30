@@ -76,7 +76,7 @@
         <div id="learnosity_assess"></div>
 
         <!-- Load the Items API library. -->
-        <script src="https://items.learnosity.com/"></script>
+        <script src="https://items-cn-au.learnosity.com/"></script>
         <script src="game.js"></script>
 
         <!-- <div class="reports-container cover-container  w-100 h-100 p-3 mx-auto flex-column">

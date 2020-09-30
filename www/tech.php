@@ -87,7 +87,7 @@
             </span>
         </div>
         <!-- Load the Items API library. -->
-        <script src="https://items.learnosity.com/"></script>
+        <script src="https://items-cn-au.learnosity.com/"></script>
         <script src="game.js"></script> 
      
             <div class="game-container text-center w-100 h-100 pl-4 pr-4 pt-2  mx-auto flex-column">
